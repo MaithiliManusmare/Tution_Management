@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="dark_bg_color">#020617</color>
+    <color name="light_yellow_bg_color">#FDF2DC</color>
+    <color name="light_blue_bg_color">#EAF6ED</color>
+    <color name="view_color">#E2E8F0</color>
+    <color name="hint_color">#94A3B8</color>
+    <color name="dark_blue">#1381FF</color>
+    <color name="hint_text_color">#94A3B8</color>
+    <color name="label_text_color">#64748B</color>
+    <color name="dark_text_color">#020617</color>
+    <color name="radio_button_color">#CBD5E1</color>
+    <color name="blue_bg_color">#F1F5F9</color>
+    <color name="brand_text_color">#334155</color>
+    <color name="filter_item_bg_color">#F8FAFC</color>
+
+</resources>

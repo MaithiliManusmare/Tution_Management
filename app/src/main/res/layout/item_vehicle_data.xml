@@ -1,0 +1,120 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/view_color" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="7dp">
+
+            <TextView
+                android:id="@+id/textModel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/brand"
+                android:textColor="@color/dark_text_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textBrand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/model"
+                android:textColor="@color/brand_text_color"
+                android:textSize="9sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/view_color" />
+
+        <TextView
+            android:id="@+id/textVehicleNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:padding="7dp"
+            android:layout_gravity="center"
+            android:text="@string/mh_12_ab_1234"
+            android:textColor="@color/dark_blue"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/view_color" />
+
+        <TextView
+            android:id="@+id/textFuelType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:padding="7dp"
+            android:layout_gravity="center"
+            android:text="@string/petrol"
+            android:textColor="@color/dark_text_color"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/view_color" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="start"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="7dp">
+
+            <TextView
+                android:id="@+id/textYearOfPurchase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2018"
+                android:textColor="@color/dark_text_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7 years 6 months"
+                android:textColor="@color/dark_text_color"
+                android:textSize="9sp" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/view_color" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/view_color" />
+</LinearLayout>
