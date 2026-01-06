@@ -39,27 +39,27 @@ class HomeScreenActivity : AppCompatActivity() {
         setAdapter()
         initializeViewModel()
 
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.filteredVehicles.collect { filteredList ->
-                    vehicleAdapter.setData(filteredList)
-                }
-            }
-        }
+//        lifecycleScope.launch {
+//            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                viewModel.filteredVehicles.collect { filteredList ->
+//                    vehicleAdapter.setData(filteredList)
+//                }
+//            }
+//        }
 
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.filteredVehicles.collect { vehicles ->
-                    vehicleAdapter.setData(vehicles)
-
-                    val totalVehiclesCount = vehicles.size
-                    val totalEVCount = vehicles.count { it.fuelType.equals(getString(R.string.electric), ignoreCase = true) }
-
-                    findViewById<TextView>(R.id.totalVehicleTv).text = totalVehiclesCount.toString()
-                    findViewById<TextView>(R.id.totalEvTv).text = totalEVCount.toString()
-                }
-            }
-        }
+//        lifecycleScope.launch {
+//            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                viewModel.filteredVehicles.collect { vehicles ->
+//                    vehicleAdapter.setData(vehicles)
+//
+//                    val totalVehiclesCount = vehicles.size
+//                    val totalEVCount = vehicles.count { it.fuelType.equals(getString(R.string.electric), ignoreCase = true) }
+//
+//                    findViewById<TextView>(R.id.totalVehicleTv).text = totalVehiclesCount.toString()
+//                    findViewById<TextView>(R.id.totalEvTv).text = totalEVCount.toString()
+//                }
+//            }
+//        }
 
     }
 

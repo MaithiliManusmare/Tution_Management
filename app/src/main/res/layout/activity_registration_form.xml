@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="@string/vehicle_details"
+                    android:text="@string/student_details"
                     android:textColor="@color/hint_color"
                     android:textSize="12sp" />
 
@@ -72,8 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="@string/brand"
-
+                    android:hint="@string/student_name"
                     app:boxBackgroundMode="outline"
                     app:boxCornerRadiusBottomEnd="14dp"
                     app:boxCornerRadiusBottomStart="14dp"
@@ -93,7 +92,7 @@
                         android:focusable="false"
                         android:clickable="true"
                         android:padding="16dp"
-                        android:text="@string/select_a_brand"
+                        android:text="@string/enter_student_name"
                         android:textColor="@color/hint_text_color"
                         android:textSize="12sp" />
 
@@ -104,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:hint="@string/model"
+                    android:hint="@string/dob"
                     app:boxBackgroundMode="outline"
                     app:boxCornerRadiusBottomEnd="14dp"
                     app:boxCornerRadiusBottomStart="14dp"
@@ -123,7 +122,7 @@
                         android:clickable="true"
                         android:inputType="none"
                         android:padding="16dp"
-                        android:text="@string/select_a_model"
+                        android:text="@string/dob"
                         android:textColor="@color/hint_text_color"
                         android:textSize="12sp" />
 
@@ -134,7 +133,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:hint="@string/fuel_type"
+                    android:hint="@string/gender"
                     app:boxBackgroundMode="outline"
                     app:boxCornerRadiusBottomEnd="14dp"
                     app:boxCornerRadiusBottomStart="14dp"
@@ -153,7 +152,7 @@
                         android:focusable="false"
                         android:clickable="true"
                         android:padding="16dp"
-                        android:text="@string/select_fuel_type"
+                        android:text="@string/gender"
                         android:textColor="@color/hint_text_color"
                         android:textSize="12sp" />
 
@@ -165,7 +164,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:hint="@string/vehicle_number"
+                    android:hint="@string/class_grade"
                     app:boxBackgroundMode="outline"
                     app:boxCornerRadiusBottomEnd="14dp"
                     app:boxCornerRadiusBottomStart="14dp"
@@ -183,7 +182,7 @@
                         android:hint=""
                         android:inputType="text"
                         android:padding="20dp"
-                        android:text="@string/vehicle_number_text"
+                        android:text="@string/class_grade"
                         android:textColor="@color/hint_text_color"
                         android:textSize="12sp" />
 
@@ -212,7 +211,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="@string/year_of_purchase"
+                    android:hint="@string/board"
                     app:boxBackgroundMode="outline"
                     app:boxCornerRadiusBottomEnd="14dp"
                     app:boxCornerRadiusBottomStart="14dp"
@@ -230,7 +229,7 @@
                         android:hint=""
                         android:inputType="text"
                         android:padding="20dp"
-                        android:text="@string/select_year_of_purchase"
+                        android:text="@string/board"
                         android:textColor="@color/hint_text_color"
                         android:textSize="12sp" />
 
@@ -240,7 +239,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:hint="@string/owner_name"
+                    android:hint="@string/enrolled_subjects"
                     app:boxBackgroundMode="outline"
                     app:boxCornerRadiusBottomEnd="14dp"
                     app:boxCornerRadiusBottomStart="14dp"
@@ -258,7 +257,203 @@
                         android:hint=""
                         android:inputType="text"
                         android:padding="20dp"
-                        android:text="@string/owner_name_text"
+                        android:text="@string/enrolled_subjects"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="@string/parent_name"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="@color/view_color"
+                    app:boxStrokeWidth="0.2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/parentsNameEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:hint=""
+                        android:inputType="text"
+                        android:padding="20dp"
+                        android:text="@string/parent_name"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="@string/parent_mobile_number"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="@color/view_color"
+                    app:boxStrokeWidth="0.2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/parentsMobileNumberEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:hint=""
+                        android:inputType="text"
+                        android:padding="20dp"
+                        android:text="@string/parent_mobile_number"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="@string/student_mobile_number"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="@color/view_color"
+                    app:boxStrokeWidth="0.2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/studentMobileNumberEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:hint=""
+                        android:inputType="text"
+                        android:padding="20dp"
+                        android:text="@string/student_mobile_number"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="@string/batch_name"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="@color/view_color"
+                    app:boxStrokeWidth="0.2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/batchNameEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:hint=""
+                        android:inputType="text"
+                        android:padding="20dp"
+                        android:text="@string/batch_name"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="@string/joining_date"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="@color/view_color"
+                    app:boxStrokeWidth="0.2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/joiningDateEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:hint=""
+                        android:inputType="text"
+                        android:padding="20dp"
+                        android:text="@string/joining_date"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="@string/fee_amount"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="@color/view_color"
+                    app:boxStrokeWidth="0.2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/feeAmountEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:hint=""
+                        android:inputType="text"
+                        android:padding="20dp"
+                        android:text="@string/fee_amount"
+                        android:textColor="@color/hint_text_color"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="@string/last_year_percent"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="@color/view_color"
+                    app:boxStrokeWidth="0.2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/lastYearPercentEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:hint=""
+                        android:inputType="text"
+                        android:padding="20dp"
+                        android:text="@string/last_year_percent"
                         android:textColor="@color/hint_text_color"
                         android:textSize="12sp" />
 

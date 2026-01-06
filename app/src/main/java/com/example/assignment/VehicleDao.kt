@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.Flow
 interface VehicleDao {
 
     @Insert
-    suspend fun insert(vehicle: Vehicle)
+    suspend fun insert(student: Student)
 
     @Query
-    ("SELECT * FROM vehicles") fun getAllVehicles(): Flow<List<Vehicle>>
+    ("SELECT * FROM student") fun getAllStudents(): Flow<List<Student>>
 
 }

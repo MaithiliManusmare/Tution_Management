@@ -3,16 +3,10 @@ package com.example.assignment
 import VehicleViewModel
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
-import android.text.SpannableString
-import android.text.Spanned
 import android.text.TextWatcher
-import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
@@ -122,12 +116,12 @@ class RegistrationFormActivity : AppCompatActivity() {
             val fuelTypes = listOf(getString(R.string.petrol),
                 getString(R.string.electric), getString(R.string.diesel), getString(R.string.cng))
 
-            showSelectionPopup(
-                title = getString(R.string.select_fuel_type),
-                items = fuelTypes,
-                icons = null,
-                targetEditText = fuelTypeEditText
-            )
+//            showSelectionPopup(
+//                title = getString(R.string.select_fuel_type),
+//                items = fuelTypes,
+//                icons = null,
+//                targetEditText = fuelTypeEditText
+//            )
         }
 
         vehicleNoEditText.setOnTouchListener { _, event ->
@@ -313,7 +307,7 @@ class RegistrationFormActivity : AppCompatActivity() {
             getString(R.string.enter_owner_name),
             getString(R.string.select_brand),
             getString(R.string.select_model),
-            getString(R.string.select_fuel_type)
+            getString(R.string.select_model)
         )
 
         if (vehicleNumber.isEmpty() || placeholders.contains(vehicleNumber) ||
@@ -327,15 +321,15 @@ class RegistrationFormActivity : AppCompatActivity() {
             return
         }
 
-        val vehicle = Vehicle(
-            brand = brand,
-            model = model,
-            fuelType = fuelType,
-            vehicleNumber = vehicleNumber,
-            yearOfPurchase = yearOfPurchase,
-            ownerName = ownerName
-        )
-        viewModel.insert(vehicle)
+//        val student = Student(
+//            brand = brand,
+//            model = model,
+//            fuelType = fuelType,
+//            vehicleNumber = vehicleNumber,
+//            yearOfPurchase = yearOfPurchase,
+//            ownerName = ownerName
+//        )
+//        viewModel.insert(v)
         finish()
     }
 

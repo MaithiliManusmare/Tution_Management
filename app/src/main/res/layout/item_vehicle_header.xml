@@ -29,7 +29,7 @@
         android:gravity="start"
         android:layout_weight="1"
         android:padding="8dp"
-        android:text="@string/vehicle_number"
+        android:text="@string/batch_name"
         android:textColor="@color/dark_text_color"
         android:textSize="11sp"
         android:textStyle="bold" />
@@ -46,7 +46,7 @@
         android:gravity="start"
         android:layout_weight="1"
         android:padding="11sp"
-        android:text="@string/fuel_type"
+        android:text="@string/board"
         android:textColor="@color/dark_text_color"
         android:textSize="11sp"
         android:textStyle="bold" />
@@ -63,7 +63,7 @@
         android:gravity="start"
         android:layout_weight="1.2"
         android:padding="8dp"
-        android:text="@string/year_of_purchase"
+        android:text="@string/joining_date"
         android:textColor="@color/dark_text_color"
         android:textSize="11sp"
         android:textStyle="bold" />

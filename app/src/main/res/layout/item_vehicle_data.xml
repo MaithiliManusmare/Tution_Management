@@ -27,7 +27,7 @@
                 android:id="@+id/textModel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/brand"
+                android:text="@string/class_grade"
                 android:textColor="@color/dark_text_color"
                 android:textSize="12sp" />
 
@@ -35,7 +35,7 @@
                 android:id="@+id/textBrand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/model"
+                android:text="@string/board"
                 android:textColor="@color/brand_text_color"
                 android:textSize="9sp" />
         </LinearLayout>

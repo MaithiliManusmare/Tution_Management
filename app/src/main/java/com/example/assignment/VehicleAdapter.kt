@@ -12,11 +12,11 @@ import java.time.Period
 
 class VehicleAdapter : RecyclerView.Adapter<VehicleAdapter.VehicleViewHolder>() {
 
-    private val items = mutableListOf<Vehicle>()
+    private val items = mutableListOf<Student>()
 
-    fun setData(vehicles: List<Vehicle>) {
+    fun setData(students: List<Student>) {
         items.clear()
-        items.addAll(vehicles)
+        items.addAll(students)
         notifyDataSetChanged()
     }
 
@@ -27,7 +27,7 @@ class VehicleAdapter : RecyclerView.Adapter<VehicleAdapter.VehicleViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: VehicleViewHolder, position: Int) {
-        holder.bind(items[position])
+//        holder.bind(items[position])
     }
 
     override fun getItemCount(): Int = items.size
@@ -41,29 +41,29 @@ class VehicleAdapter : RecyclerView.Adapter<VehicleAdapter.VehicleViewHolder>() 
         private val tvPurchase: TextView = itemView.findViewById(R.id.textDuration)
 
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bind(vehicle: Vehicle) {
-            tvModel.text = vehicle.model
-            tvBrand.text = vehicle.brand
-            tvVehicleNo.text = vehicle.vehicleNumber
-            tvFuelType.text = vehicle.fuelType
-            tvYear.text = vehicle.yearOfPurchase
-            tvPurchase.text = vehicle.yearOfPurchase
+        fun bind(student: Student) {
+            tvModel.text = student.name
+//            tvBrand.text = student.brand
+//            tvVehicleNo.text = student.vehicleNumber
+//            tvFuelType.text = student.fuelType
+//            tvYear.text = student.yearOfPurchase
+//            tvPurchase.text = student.yearOfPurchase
 
             try {
-                val purchaseYear = vehicle.yearOfPurchase.toInt()
-                val purchaseDate = LocalDate.of(purchaseYear, 1, 1)
+//                val purchaseYear = student.yearOfPurchase.toInt()
+//                val purchaseDate = LocalDate.of(purchaseYear, 1, 1)
                 val now = LocalDate.now()
 
-                val period = Period.between(purchaseDate, now)
-                val years = period.years
-                val months = period.months
+//                val period = Period.between(purchaseDate, now)
+//                val years = period.years
+//                val months = period.months
 
-                val yearsText = if (years > 0) "$years year${if (years > 1) "s" else ""}" else ""
-                val monthsText = if (months > 0) "$months month${if (months > 1) "s" else ""}" else ""
+//                val yearsText = if (years > 0) "$years year${if (years > 1) "s" else ""}" else ""
+//                val monthsText = if (months > 0) "$months month${if (months > 1) "s" else ""}" else ""
+//
+//                val durationText = listOf(yearsText, monthsText).filter { it.isNotEmpty() }.joinToString(" ")
 
-                val durationText = listOf(yearsText, monthsText).filter { it.isNotEmpty() }.joinToString(" ")
-
-                tvPurchase.text = if (durationText.isNotEmpty()) durationText else "Less than a month"
+//                tvPurchase.text = if (durationText.isNotEmpty()) durationText else "Less than a month"
             } catch (e: Exception) {
                 tvPurchase.text = "Invalid date"
             }

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Vehicle::class], version = 1, exportSchema = false)
+@Database(entities = [Student::class], version = 1, exportSchema = false)
 abstract class VehicleDatabase : RoomDatabase() {
     abstract fun vehicleDao(): VehicleDao
 
@@ -18,7 +18,7 @@ abstract class VehicleDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     VehicleDatabase::class.java,
-                    "vehicle_database"
+                    "student_database"
                 ).build()
                 INSTANCE = instance
                 instance

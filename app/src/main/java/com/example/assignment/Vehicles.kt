@@ -3,14 +3,21 @@ package com.example.assignment
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "vehicles")
-data class Vehicle(
+@Entity(tableName = "student")
+data class Student(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val brand: String,
-    val model: String,
-    val fuelType: String,
-    val vehicleNumber: String,
-    val yearOfPurchase: String,
-    val ownerName: String
+    val name: String,
+    val dob: Long,
+    val gender: String,
+    val grade: Int,
+    val board: String,
+    val subjects: String,
+    val guardianName: String,
+    val guardianMobNumber: String,
+    val studentMobNumber: String,
+    val batchName: String,
+    val joiningDate: Long,
+    val feeAmount: Int,
+    val lastYearPercent: Float
 )
