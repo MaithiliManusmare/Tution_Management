@@ -5,9 +5,6 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.graphics.Typeface
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
@@ -80,162 +77,13 @@ class RegistrationFormActivity : AppCompatActivity() {
             submitForm()
         }
 
-
         backArrowIv.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        gradeEditText.setOnClickListener {
-            val brandNames = listOf(getString(R.string.tata),
-                getString(R.string.honda), getString(R.string.hero),
-                getString(R.string.bajaj), getString(R.string.yamaha), getString(R.string.others))
-            val brandIcons = listOf(
-                R.drawable.tata,
-                R.drawable.honda,
-                R.drawable.hero,
-                R.drawable.bajaj,
-                R.drawable.yamaha
-            )
-            showSelectionPopup(
-                title = getString(R.string.select_brand),
-                items = brandNames,
-                icons = brandIcons,
-                targetEditText = gradeEditText
-            )
-        }
-
-        boardEditText.setOnClickListener {
-            val modelNames = listOf(
-                getString(R.string.activa_4g),
-                getString(R.string.activa_5g),
-                getString(R.string.activa_6g),
-                getString(R.string.activa_125),
-                getString(R.string.activa_125_bsg),
-                getString(R.string.activa_h_smart)
-            )
-            showSelectionPopup(
-                title = getString(R.string.select_vehicle_model),
-                items = modelNames,
-                icons = null,
-                targetEditText = boardEditText
-            )
-        }
-
-        enrolledSubjectsEditText.setOnClickListener {
-            val fuelTypes = listOf(getString(R.string.petrol),
-                getString(R.string.electric), getString(R.string.diesel), getString(R.string.cng))
-
-//            showSelectionPopup(
-//                title = getString(R.string.select_fuel_type),
-//                items = fuelTypes,
-//                icons = null,
-//                targetEditText = fuelTypeEditText
-//            )
-        }
-
-        studentNameEditText.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                studentNameEditText.setText("")
-            }
-            false
-        }
-
-        studentNameEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (!s.isNullOrEmpty()) {
-                    studentNameEditText.setTextColor(
-                        ContextCompat.getColor(
-                            this@RegistrationFormActivity,
-                            R.color.dark_text_color
-                        )
-                    )
-                    studentNameEditText.setTypeface(studentNameEditText.typeface, Typeface.BOLD)
-                    studentNameEditText.textSize = 14f
-                } else {
-                    studentNameEditText.setTextColor(
-                        ContextCompat.getColor(
-                            this@RegistrationFormActivity,
-                            R.color.dark_text_color
-                        )
-                    )
-                    studentNameEditText.setTypeface(null, Typeface.NORMAL)
-                    studentNameEditText.textSize = 14f
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
-
-
-
-        genderEditText.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                genderEditText.setText("")
-            }
-            false
-        }
-
-        genderEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (!s.isNullOrEmpty()) {
-                    genderEditText.setTextColor(
-                        ContextCompat.getColor(
-                            this@RegistrationFormActivity,
-                            R.color.dark_text_color
-                        )
-                    )
-                    genderEditText.setTypeface(genderEditText.typeface, Typeface.BOLD)
-                    genderEditText.textSize = 14f
-                } else {
-                    genderEditText.setTextColor(
-                        ContextCompat.getColor(
-                            this@RegistrationFormActivity,
-                            R.color.dark_text_color
-                        )
-                    )
-                    genderEditText.setTypeface(null, Typeface.NORMAL)
-                    genderEditText.textSize = 14f
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
-
         dateOfBirthEditText.setOnClickListener {
             showDatePickerDialog()
         }
-
-        dateOfBirthEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (!s.isNullOrEmpty()) {
-                    dateOfBirthEditText.setTextColor(
-                        ContextCompat.getColor(
-                            this@RegistrationFormActivity,
-                            R.color.dark_text_color
-                        )
-                    )
-                    dateOfBirthEditText.setTypeface(dateOfBirthEditText.typeface, Typeface.BOLD)
-                    dateOfBirthEditText.textSize = 14f
-                } else {
-                    dateOfBirthEditText.setTextColor(
-                        ContextCompat.getColor(
-                            this@RegistrationFormActivity,
-                            R.color.dark_text_color
-                        )
-                    )
-                    dateOfBirthEditText.setTypeface(null, Typeface.NORMAL)
-                    dateOfBirthEditText.textSize = 14f
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
 
     }
 
@@ -331,6 +179,12 @@ class RegistrationFormActivity : AppCompatActivity() {
             enrolledSubjects.isEmpty() || placeholders.contains(enrolledSubjects)
         ) {
             Toast.makeText(this, getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT).show()
+
+
+
+
+
+
             return
         }
 
@@ -356,12 +210,12 @@ class RegistrationFormActivity : AppCompatActivity() {
 
 
     private fun initIds() {
-        studentNameEditText = findViewById(R.id.vehicleNoTypeEditText)
-        dateOfBirthEditText = findViewById(R.id.yearEditText)
-        genderEditText = findViewById(R.id.ownerNameEditText)
-        gradeEditText = findViewById(R.id.brandEditText)
-        boardEditText = findViewById(R.id.nameEditText)
-        enrolledSubjectsEditText = findViewById(R.id.fuelTypeEditText)
+        studentNameEditText = findViewById(R.id.nameEditText)
+        dateOfBirthEditText = findViewById(R.id.dobEditText)
+        genderEditText = findViewById(R.id.genderEditText)
+        gradeEditText = findViewById(R.id.classEditText)
+        boardEditText = findViewById(R.id.dobEditText)
+        enrolledSubjectsEditText = findViewById(R.id.enrolledSubjectsEditText)
         parentNameEditText = findViewById(R.id.parentsNameEditText)
         parentMobNoEditText = findViewById(R.id.parentsMobileNumberEditText)
         studentMobNoEditText = findViewById(R.id.studentMobileNumberEditText)
