@@ -6,18 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [Student::class], version = 1, exportSchema = false)
-abstract class VehicleDatabase : RoomDatabase() {
-    abstract fun vehicleDao(): VehicleDao
+abstract class StudentDatabase : RoomDatabase() {
+    abstract fun studentDao(): StudentDao
 
     companion object {
         @Volatile
-        private var INSTANCE: VehicleDatabase? = null
+        private var INSTANCE: StudentDatabase? = null
 
-        fun getDatabase(context: Context): VehicleDatabase {
+        fun getDatabase(context: Context): StudentDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    VehicleDatabase::class.java,
+                    StudentDatabase::class.java,
                     "student_database"
                 ).build()
                 INSTANCE = instance

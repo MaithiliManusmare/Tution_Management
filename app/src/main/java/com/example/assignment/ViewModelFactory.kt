@@ -1,14 +1,14 @@
 package com.example.assignment
 
-import VehicleViewModel
+import StudentViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class viewModelFactory(private val repository: VehicleRepository) : ViewModelProvider.Factory {
+class viewModelFactory(private val repository: StudentRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(VehicleViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(StudentViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return VehicleViewModel(repository) as T
+            return StudentViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

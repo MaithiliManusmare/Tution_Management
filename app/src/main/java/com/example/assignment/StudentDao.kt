@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 
 @Dao
-interface VehicleDao {
+interface StudentDao {
 
     @Insert
     suspend fun insert(student: Student)

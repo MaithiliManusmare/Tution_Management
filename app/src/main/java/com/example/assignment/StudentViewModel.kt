@@ -1,11 +1,11 @@
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.assignment.Student
-import com.example.assignment.VehicleRepository
+import com.example.assignment.StudentRepository
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class VehicleViewModel(private val repository: VehicleRepository) : ViewModel() {
+class StudentViewModel(private val repository: StudentRepository) : ViewModel() {
 
     private val allVehiclesFlow: Flow<List<Student>> = repository.allVehicles
 
@@ -27,9 +27,14 @@ class VehicleViewModel(private val repository: VehicleRepository) : ViewModel() 
 
     fun insert(student: Student) {
         viewModelScope.launch {
-            repository.insert(student)
+            try {
+                repository.insert(student)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
+
 
     fun updateSelectedBrands(brands: List<String>) {
         selectedBrands.value = brands

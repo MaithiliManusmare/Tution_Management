@@ -1,6 +1,6 @@
 package com.example.assignment
 
-import VehicleViewModel
+import StudentViewModel
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.graphics.Typeface
@@ -27,16 +27,25 @@ import com.google.android.material.textfield.TextInputEditText
 import java.util.Calendar
 
 class RegistrationFormActivity : AppCompatActivity() {
-    private lateinit var vehicleNoEditText: TextInputEditText
-    private lateinit var yearEditText: TextInputEditText
-    private lateinit var ownerNameEditText: TextInputEditText
-    private lateinit var brandEditText: TextInputEditText
-    private lateinit var modelEditText: TextInputEditText
-    private lateinit var fuelTypeEditText: TextInputEditText
-    private lateinit var db: VehicleDatabase
-    private lateinit var dao: VehicleDao
-    private lateinit var viewModel: VehicleViewModel
-    private lateinit var repository: VehicleRepository
+    private lateinit var studentNameEditText: TextInputEditText
+    private lateinit var dateOfBirthEditText: TextInputEditText
+    private lateinit var genderEditText: TextInputEditText
+    private lateinit var gradeEditText: TextInputEditText
+    private lateinit var boardEditText: TextInputEditText
+    private lateinit var enrolledSubjectsEditText: TextInputEditText
+
+    private lateinit var parentNameEditText: TextInputEditText
+
+    private lateinit var parentMobNoEditText: TextInputEditText
+    private lateinit var studentMobNoEditText: TextInputEditText
+    private lateinit var batchNameEditText: TextInputEditText
+    private lateinit var joiningDateEditText: TextInputEditText
+    private lateinit var feeAmountEditText: TextInputEditText
+    private lateinit var lastYearPercentEditText: TextInputEditText
+    private lateinit var db: StudentDatabase
+    private lateinit var dao: StudentDao
+    private lateinit var viewModel: StudentViewModel
+    private lateinit var repository: StudentRepository
     private lateinit var factory: viewModelFactory
 
 
@@ -55,19 +64,19 @@ class RegistrationFormActivity : AppCompatActivity() {
     }
 
     private fun createObject() {
-        db = VehicleDatabase.getDatabase(this)
-        dao = db.vehicleDao()
-        repository = VehicleRepository(dao)
+        db = StudentDatabase.getDatabase(this)
+        dao = db.studentDao()
+        repository = StudentRepository(dao)
         factory = viewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(VehicleViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(StudentViewModel::class.java)
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun onClickListners() {
-        val addVehicleButton = findViewById<TextView>(R.id.addButtonTv)
+        val addButton = findViewById<TextView>(R.id.addButtonTv)
         val backArrowIv = findViewById<ImageView>(R.id.backArrowIv)
 
-        addVehicleButton.setOnClickListener {
+        addButton.setOnClickListener {
             submitForm()
         }
 
@@ -76,7 +85,7 @@ class RegistrationFormActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        brandEditText.setOnClickListener {
+        gradeEditText.setOnClickListener {
             val brandNames = listOf(getString(R.string.tata),
                 getString(R.string.honda), getString(R.string.hero),
                 getString(R.string.bajaj), getString(R.string.yamaha), getString(R.string.others))
@@ -91,11 +100,11 @@ class RegistrationFormActivity : AppCompatActivity() {
                 title = getString(R.string.select_brand),
                 items = brandNames,
                 icons = brandIcons,
-                targetEditText = brandEditText
+                targetEditText = gradeEditText
             )
         }
 
-        modelEditText.setOnClickListener {
+        boardEditText.setOnClickListener {
             val modelNames = listOf(
                 getString(R.string.activa_4g),
                 getString(R.string.activa_5g),
@@ -108,11 +117,11 @@ class RegistrationFormActivity : AppCompatActivity() {
                 title = getString(R.string.select_vehicle_model),
                 items = modelNames,
                 icons = null,
-                targetEditText = modelEditText
+                targetEditText = boardEditText
             )
         }
 
-        fuelTypeEditText.setOnClickListener {
+        enrolledSubjectsEditText.setOnClickListener {
             val fuelTypes = listOf(getString(R.string.petrol),
                 getString(R.string.electric), getString(R.string.diesel), getString(R.string.cng))
 
@@ -124,35 +133,35 @@ class RegistrationFormActivity : AppCompatActivity() {
 //            )
         }
 
-        vehicleNoEditText.setOnTouchListener { _, event ->
+        studentNameEditText.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
-                vehicleNoEditText.setText("")
+                studentNameEditText.setText("")
             }
             false
         }
 
-        vehicleNoEditText.addTextChangedListener(object : TextWatcher {
+        studentNameEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.isNullOrEmpty()) {
-                    vehicleNoEditText.setTextColor(
+                    studentNameEditText.setTextColor(
                         ContextCompat.getColor(
                             this@RegistrationFormActivity,
                             R.color.dark_text_color
                         )
                     )
-                    vehicleNoEditText.setTypeface(vehicleNoEditText.typeface, Typeface.BOLD)
-                    vehicleNoEditText.textSize = 14f
+                    studentNameEditText.setTypeface(studentNameEditText.typeface, Typeface.BOLD)
+                    studentNameEditText.textSize = 14f
                 } else {
-                    vehicleNoEditText.setTextColor(
+                    studentNameEditText.setTextColor(
                         ContextCompat.getColor(
                             this@RegistrationFormActivity,
                             R.color.dark_text_color
                         )
                     )
-                    vehicleNoEditText.setTypeface(null, Typeface.NORMAL)
-                    vehicleNoEditText.textSize = 14f
+                    studentNameEditText.setTypeface(null, Typeface.NORMAL)
+                    studentNameEditText.textSize = 14f
                 }
             }
 
@@ -161,67 +170,67 @@ class RegistrationFormActivity : AppCompatActivity() {
 
 
 
-        ownerNameEditText.setOnTouchListener { _, event ->
+        genderEditText.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
-                ownerNameEditText.setText("")
+                genderEditText.setText("")
             }
             false
         }
 
-        ownerNameEditText.addTextChangedListener(object : TextWatcher {
+        genderEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.isNullOrEmpty()) {
-                    ownerNameEditText.setTextColor(
+                    genderEditText.setTextColor(
                         ContextCompat.getColor(
                             this@RegistrationFormActivity,
                             R.color.dark_text_color
                         )
                     )
-                    ownerNameEditText.setTypeface(ownerNameEditText.typeface, Typeface.BOLD)
-                    ownerNameEditText.textSize = 14f
+                    genderEditText.setTypeface(genderEditText.typeface, Typeface.BOLD)
+                    genderEditText.textSize = 14f
                 } else {
-                    ownerNameEditText.setTextColor(
+                    genderEditText.setTextColor(
                         ContextCompat.getColor(
                             this@RegistrationFormActivity,
                             R.color.dark_text_color
                         )
                     )
-                    ownerNameEditText.setTypeface(null, Typeface.NORMAL)
-                    ownerNameEditText.textSize = 14f
+                    genderEditText.setTypeface(null, Typeface.NORMAL)
+                    genderEditText.textSize = 14f
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        yearEditText.setOnClickListener {
+        dateOfBirthEditText.setOnClickListener {
             showDatePickerDialog()
         }
 
-        yearEditText.addTextChangedListener(object : TextWatcher {
+        dateOfBirthEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.isNullOrEmpty()) {
-                    yearEditText.setTextColor(
+                    dateOfBirthEditText.setTextColor(
                         ContextCompat.getColor(
                             this@RegistrationFormActivity,
                             R.color.dark_text_color
                         )
                     )
-                    yearEditText.setTypeface(yearEditText.typeface, Typeface.BOLD)
-                    yearEditText.textSize = 14f
+                    dateOfBirthEditText.setTypeface(dateOfBirthEditText.typeface, Typeface.BOLD)
+                    dateOfBirthEditText.textSize = 14f
                 } else {
-                    yearEditText.setTextColor(
+                    dateOfBirthEditText.setTextColor(
                         ContextCompat.getColor(
                             this@RegistrationFormActivity,
                             R.color.dark_text_color
                         )
                     )
-                    yearEditText.setTypeface(null, Typeface.NORMAL)
-                    yearEditText.textSize = 14f
+                    dateOfBirthEditText.setTypeface(null, Typeface.NORMAL)
+                    dateOfBirthEditText.textSize = 14f
                 }
             }
 
@@ -237,7 +246,7 @@ class RegistrationFormActivity : AppCompatActivity() {
         val datePickerDialog = DatePickerDialog(
             this,
             { _, selectedYear, _, _ ->
-                yearEditText.setText(selectedYear.toString())
+                dateOfBirthEditText.setText(selectedYear.toString())
             },
             year,
             calendar.get(Calendar.MONTH),
@@ -294,52 +303,71 @@ class RegistrationFormActivity : AppCompatActivity() {
 
 
     private fun submitForm() {
-        val vehicleNumber = vehicleNoEditText.text?.toString()?.trim().orEmpty()
-        val yearOfPurchase = yearEditText.text?.toString()?.trim().orEmpty()
-        val ownerName = ownerNameEditText.text?.toString()?.trim().orEmpty()
-        val brand = brandEditText.text?.toString()?.trim().orEmpty()
-        val model = modelEditText.text?.toString()?.trim().orEmpty()
-        val fuelType = fuelTypeEditText.text?.toString()?.trim().orEmpty()
+        val studentName = studentNameEditText.text?.toString()?.trim().orEmpty()
+        val dateOfBirth = dateOfBirthEditText.text?.toString()?.toLong() ?: 0
+        val gender = genderEditText.text?.toString()?.trim().orEmpty()
+        val grade = gradeEditText.text?.toString()?.toIntOrNull() ?: 0
+        val board = boardEditText.text?.toString()?.trim().orEmpty()
+        val enrolledSubjects = enrolledSubjectsEditText.text?.toString()?.trim().orEmpty()
+        val parentName = parentNameEditText.text?.toString()?.trim().orEmpty()
+        val parentMobileNumber = parentMobNoEditText.text?.toString()?.trim().orEmpty()
+        val studentMobileNumber = studentMobNoEditText.text?.toString()?.trim().orEmpty()
+        val courseName = batchNameEditText.text?.toString()?.trim().orEmpty()
+        val dateOfJoining = joiningDateEditText.text?.toString()?.trim().orEmpty()
+        val feeAmount = feeAmountEditText.text?.toString()?.toIntOrNull() ?: 0
+        val lastYearPercent = lastYearPercentEditText.text.toString()?.trim().orEmpty()
 
         val placeholders = listOf(
             getString(R.string.enter_vehicle_number),
             getString(R.string.enter_year),
-            getString(R.string.enter_owner_name),
-            getString(R.string.select_brand),
+            getString(R.string.enter_owner_name), getString(R.string.select_brand),
             getString(R.string.select_model),
             getString(R.string.select_model)
         )
 
-        if (vehicleNumber.isEmpty() || placeholders.contains(vehicleNumber) ||
-            yearOfPurchase.isEmpty() || placeholders.contains(yearOfPurchase) ||
-            ownerName.isEmpty() || placeholders.contains(ownerName) ||
-            brand.isEmpty() || placeholders.contains(brand) ||
-            model.isEmpty() || placeholders.contains(model) ||
-            fuelType.isEmpty() || placeholders.contains(fuelType)
+        if (studentName.isEmpty() || placeholders.contains(studentName) ||
+            gender.isEmpty() || placeholders.contains(gender) ||
+            board.isEmpty() || placeholders.contains(board) ||
+            enrolledSubjects.isEmpty() || placeholders.contains(enrolledSubjects)
         ) {
             Toast.makeText(this, getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT).show()
             return
         }
 
-//        val student = Student(
-//            brand = brand,
-//            model = model,
-//            fuelType = fuelType,
-//            vehicleNumber = vehicleNumber,
-//            yearOfPurchase = yearOfPurchase,
-//            ownerName = ownerName
-//        )
-//        viewModel.insert(v)
+        val student = Student(
+            grade = grade,
+            board = board,
+            subjects = enrolledSubjects,
+            name = studentName,
+            dob = dateOfBirth,
+            gender = gender,
+            guardianName = parentName,
+            guardianMobNumber = parentMobileNumber,
+            studentMobNumber = studentMobileNumber,
+            batchName = courseName,
+            joiningDate = dateOfJoining,
+            feeAmount = feeAmount,
+            lastYearPercent = lastYearPercent
+        )
+
+        viewModel.insert(student)
         finish()
     }
 
 
     private fun initIds() {
-        vehicleNoEditText = findViewById(R.id.vehicleNoTypeEditText)
-        yearEditText = findViewById(R.id.yearEditText)
-        ownerNameEditText = findViewById(R.id.ownerNameEditText)
-        brandEditText = findViewById(R.id.brandEditText)
-        modelEditText = findViewById(R.id.nameEditText)
-        fuelTypeEditText = findViewById(R.id.fuelTypeEditText)
+        studentNameEditText = findViewById(R.id.vehicleNoTypeEditText)
+        dateOfBirthEditText = findViewById(R.id.yearEditText)
+        genderEditText = findViewById(R.id.ownerNameEditText)
+        gradeEditText = findViewById(R.id.brandEditText)
+        boardEditText = findViewById(R.id.nameEditText)
+        enrolledSubjectsEditText = findViewById(R.id.fuelTypeEditText)
+        parentNameEditText = findViewById(R.id.parentsNameEditText)
+        parentMobNoEditText = findViewById(R.id.parentsMobileNumberEditText)
+        studentMobNoEditText = findViewById(R.id.studentMobileNumberEditText)
+        batchNameEditText = findViewById(R.id.batchNameEditText)
+        joiningDateEditText = findViewById(R.id.joiningDateEditText)
+        feeAmountEditText = findViewById(R.id.feeAmountEditText)
+        lastYearPercentEditText = findViewById(R.id.lastYearPercentEditText)
     }
 }

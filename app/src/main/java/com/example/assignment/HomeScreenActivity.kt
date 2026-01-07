@@ -1,26 +1,21 @@
 package com.example.assignment
 
-import VehicleViewModel
+import StudentViewModel
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.assignment.R.id.recyclerView
-import kotlinx.coroutines.launch
 
 class HomeScreenActivity : AppCompatActivity() {
     lateinit var button: TextView
-    private lateinit var viewModel: VehicleViewModel
+    private lateinit var viewModel: StudentViewModel
     private lateinit var vehicleAdapter: VehicleAdapter
     private lateinit var filterTv: TextView
 
@@ -64,10 +59,10 @@ class HomeScreenActivity : AppCompatActivity() {
     }
 
     private fun initializeViewModel() {
-        val vehicleDao = VehicleDatabase.getDatabase(applicationContext).vehicleDao()
-        val repository = VehicleRepository(vehicleDao)
+        val vehicleDao = StudentDatabase.getDatabase(applicationContext).studentDao()
+        val repository = StudentRepository(vehicleDao)
         val factory = viewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[VehicleViewModel::class.java]
+        viewModel = ViewModelProvider(this, factory)[StudentViewModel::class.java]
     }
 
     private fun setAdapter() {

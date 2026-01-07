@@ -17,7 +17,7 @@ data class Student(
     val guardianMobNumber: String,
     val studentMobNumber: String,
     val batchName: String,
-    val joiningDate: Long,
+    val joiningDate: String,
     val feeAmount: Int,
-    val lastYearPercent: Float
+    val lastYearPercent: String
 )
