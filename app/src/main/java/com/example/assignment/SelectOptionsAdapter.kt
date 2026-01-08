@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 class SelectOptionsAdapter(
     private val names: List<String>,
-    private val icons: List<Int>?,
     private var selectedPosition: Int = -1,
     private val onItemSelected: (String) -> Unit
 ) : RecyclerView.Adapter<SelectOptionsAdapter.ViewHolder>() {
@@ -28,14 +27,14 @@ class SelectOptionsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = names[position]
-        val iconRes: Int? = (icons ?: emptyList()).getOrNull(position)
+//        val iconRes: Int? = (icons ?: emptyList()).getOrNull(position)
 
-        if (iconRes != null && iconRes != 0) {
-            holder.icon.visibility = View.VISIBLE
-            holder.icon.setImageResource(iconRes)
-        } else {
-            holder.icon.visibility = View.GONE
-        }
+//        if (iconRes != null && iconRes != 0) {
+//            holder.icon.visibility = View.VISIBLE
+//            holder.icon.setImageResource(iconRes)
+//        } else {
+//            holder.icon.visibility = View.GONE
+//        }
         holder.radioButton.isChecked = position == selectedPosition
 
         holder.itemView.setOnClickListener {

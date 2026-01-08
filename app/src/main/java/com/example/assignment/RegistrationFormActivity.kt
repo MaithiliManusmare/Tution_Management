@@ -72,6 +72,14 @@ class RegistrationFormActivity : AppCompatActivity() {
     private fun onClickListners() {
         val addButton = findViewById<TextView>(R.id.addButtonTv)
         val backArrowIv = findViewById<ImageView>(R.id.backArrowIv)
+        val genderList : List<String> = listOf("Male","Female","Other")
+        val boardList : List<String> = listOf("State Board","CBSE","ICSE")
+        val enrolledSubjectList : List<String> = listOf("All Subjects")
+        val classList = mutableListOf<String>()
+
+        for (i in 1..12) {
+            classList.add(i.toString())
+        }
 
         addButton.setOnClickListener {
             submitForm()
@@ -82,19 +90,48 @@ class RegistrationFormActivity : AppCompatActivity() {
         }
 
         dateOfBirthEditText.setOnClickListener {
-            showDatePickerDialog()
+            showDatePickerDialog(true)
+        }
+
+        joiningDateEditText.setOnClickListener {
+            showDatePickerDialog(false)
+        }
+
+        genderEditText.setOnClickListener{
+            showSelectionPopup("Choose Gender",genderList, genderEditText);
+        }
+
+        gradeEditText.setOnClickListener{
+            showSelectionPopup("Choose Class/Grade",classList, gradeEditText);
+        }
+
+        boardEditText.setOnClickListener{
+            showSelectionPopup("Choose Board",boardList, boardEditText);
+        }
+
+        enrolledSubjectsEditText.setOnClickListener{
+            showSelectionPopup("Select Subject",enrolledSubjectList, enrolledSubjectsEditText);
         }
 
     }
 
-    private fun showDatePickerDialog() {
+    private fun showDatePickerDialog(isBirthDate : Boolean) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
 
         val datePickerDialog = DatePickerDialog(
             this,
-            { _, selectedYear, _, _ ->
-                dateOfBirthEditText.setText(selectedYear.toString())
+            { _, selectedYear, month, date ->
+                val formattedDate = String.format(
+                    "%02d/%02d/%04d",
+                    date,
+                    month + 1,
+                    selectedYear
+                )
+
+                (if (isBirthDate) dateOfBirthEditText else joiningDateEditText)
+                    .setText(formattedDate)
+
             },
             year,
             calendar.get(Calendar.MONTH),
@@ -115,7 +152,6 @@ class RegistrationFormActivity : AppCompatActivity() {
     private fun showSelectionPopup(
         title: String,
         items: List<String>,
-        icons: List<Int>?,
         targetEditText: EditText,
     ) {
         val dialog = AlertDialog.Builder(this)
@@ -137,7 +173,7 @@ class RegistrationFormActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val adapter = SelectOptionsAdapter(items, icons) { selectedItem ->
+        val adapter = SelectOptionsAdapter(items,) { selectedItem ->
             targetEditText.setText(selectedItem)
             targetEditText.setTextColor(ContextCompat.getColor(this, R.color.black))
             targetEditText.setTypeface(null, Typeface.BOLD)
@@ -152,7 +188,7 @@ class RegistrationFormActivity : AppCompatActivity() {
 
     private fun submitForm() {
         val studentName = studentNameEditText.text?.toString()?.trim().orEmpty()
-        val dateOfBirth = dateOfBirthEditText.text?.toString()?.toLong() ?: 0
+        val dateOfBirth = dateOfBirthEditText.text?.toString()?.trim().orEmpty()
         val gender = genderEditText.text?.toString()?.trim().orEmpty()
         val grade = gradeEditText.text?.toString()?.toIntOrNull() ?: 0
         val board = boardEditText.text?.toString()?.trim().orEmpty()
@@ -179,12 +215,6 @@ class RegistrationFormActivity : AppCompatActivity() {
             enrolledSubjects.isEmpty() || placeholders.contains(enrolledSubjects)
         ) {
             Toast.makeText(this, getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT).show()
-
-
-
-
-
-
             return
         }
 
@@ -214,7 +244,7 @@ class RegistrationFormActivity : AppCompatActivity() {
         dateOfBirthEditText = findViewById(R.id.dobEditText)
         genderEditText = findViewById(R.id.genderEditText)
         gradeEditText = findViewById(R.id.classEditText)
-        boardEditText = findViewById(R.id.dobEditText)
+        boardEditText = findViewById(R.id.boardEditText)
         enrolledSubjectsEditText = findViewById(R.id.enrolledSubjectsEditText)
         parentNameEditText = findViewById(R.id.parentsNameEditText)
         parentMobNoEditText = findViewById(R.id.parentsMobileNumberEditText)

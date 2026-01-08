@@ -8,7 +8,7 @@ data class Student(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
-    val dob: Long,
+    val dob: String,
     val gender: String,
     val grade: Int,
     val board: String,
