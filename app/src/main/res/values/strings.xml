@@ -21,9 +21,9 @@
     <string name="hi_amin">Hi, Amin 👋</string>
     <string name="welcome_back">Welcome back!</string>
     <string name="car">🚘</string>
-    <string name="total_vehicles">Total Vehicles</string>
-    <string name="ev_image">⚡</string>
-    <string name="total_ev">Total EV</string>
+    <string name="total_students">Total Students</string>
+    <string name="Course">Course</string>
+    <string name="total_courses">Total Courses</string>
     <string name="filter">Filter</string>
     <string name="clear_all">Clear All</string>
     <string name="apply">Apply</string>

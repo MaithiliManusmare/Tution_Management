@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".StudentListActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/listTitleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student List"
+            android:textColor="@color/dark_text_color"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:layout_alignParentStart="true"
+            android:textSize="18dp"/>
+
+        <View
+            android:layout_width="150dp"
+            android:layout_height="0.5px"
+            android:background="@color/view_color"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/filterTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filter"
+            android:drawableStart="@drawable/outline_filter_alt_24"
+            android:background="@drawable/rounded_border_bg"
+            android:layout_below="@+id/listTitleTv"
+            android:textColor="@color/dark_text_color"
+            android:padding="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <include
+            android:id="@+id/recyclerHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_vehicle_header"
+            android:layout_below="@+id/filterTv"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_below="@+id/recyclerHeader"
+            android:layout_width="match_parent"
+            android:clipToOutline="true"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Vehicle"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:padding="15dp"
+        android:layout_marginEnd="20dp"
+        android:textStyle="bold"
+        android:background="@drawable/round_blue_background"
+        android:drawableLeft="@drawable/add_icon"
+        android:drawablePadding="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="24dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

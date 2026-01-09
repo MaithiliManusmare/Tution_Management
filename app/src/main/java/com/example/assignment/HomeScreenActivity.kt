@@ -3,21 +3,15 @@ package com.example.assignment
 import StudentViewModel
 import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.assignment.R.id.recyclerView
 
 class HomeScreenActivity : AppCompatActivity() {
-    lateinit var button: TextView
-    private lateinit var viewModel: StudentViewModel
-    private lateinit var vehicleAdapter: VehicleAdapter
-    private lateinit var filterTv: TextView
+    private lateinit var studentCardButton: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +25,6 @@ class HomeScreenActivity : AppCompatActivity() {
         createObject()
         initVariables()
         onClickListener()
-        setAdapter()
-        initializeViewModel()
 
 //        lifecycleScope.launch {
 //            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -58,43 +50,31 @@ class HomeScreenActivity : AppCompatActivity() {
 
     }
 
-    private fun initializeViewModel() {
-        val vehicleDao = StudentDatabase.getDatabase(applicationContext).studentDao()
-        val repository = StudentRepository(vehicleDao)
-        val factory = viewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[StudentViewModel::class.java]
-    }
-
-    private fun setAdapter() {
-        val recyclerView = findViewById<RecyclerView>(recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        vehicleAdapter = VehicleAdapter()
-        recyclerView.adapter = vehicleAdapter
-    }
-
     private fun onClickListener() {
-        button.setOnClickListener {
-            val intent = Intent(this, RegistrationFormActivity::class.java)
+
+
+//        filterTv.setOnClickListener {
+//            val filterDialog = FilterDialogFragment()
+//            filterDialog.setOnApplyListener { selectedBrands, selectedFuelTypes ->
+//                viewModel.updateSelectedBrands(selectedBrands)
+//                viewModel.updateSelectedFuelTypes(selectedFuelTypes)
+//            }
+//            filterDialog.show(supportFragmentManager, "FilterDialog")
+//        }
+
+        studentCardButton.setOnClickListener {
+            val intent = Intent(this, StudentListActivity::class.java)
             startActivity(intent)
         }
 
-        filterTv.setOnClickListener {
-            val filterDialog = FilterDialogFragment()
-            filterDialog.setOnApplyListener { selectedBrands, selectedFuelTypes ->
-                viewModel.updateSelectedBrands(selectedBrands)
-                viewModel.updateSelectedFuelTypes(selectedFuelTypes)
-            }
-            filterDialog.show(supportFragmentManager, "FilterDialog")
-        }
     }
 
     fun createObject() {
     }
 
     fun initVariables() {
-        button = findViewById(R.id.addButton)
-        filterTv = findViewById(R.id.filterTv)
+//        filterTv = findViewById(R.id.filterTv)
+        studentCardButton = findViewById(R.id.studentCard)
     }
-
 
 }
