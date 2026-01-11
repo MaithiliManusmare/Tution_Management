@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 
 class HomeScreenActivity : AppCompatActivity() {
     private lateinit var studentCardButton: LinearLayout
+    private lateinit var batchCardButton: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +68,11 @@ class HomeScreenActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        batchCardButton.setOnClickListener {
+            val intent = Intent(this, BatchListActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     fun createObject() {
@@ -75,6 +81,7 @@ class HomeScreenActivity : AppCompatActivity() {
     fun initVariables() {
 //        filterTv = findViewById(R.id.filterTv)
         studentCardButton = findViewById(R.id.studentCard)
+        batchCardButton = findViewById(R.id.batchCard)
     }
 
 }
