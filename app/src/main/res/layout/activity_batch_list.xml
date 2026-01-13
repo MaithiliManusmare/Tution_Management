@@ -20,7 +20,6 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/create_course"/>
-
+        android:text="@string/create_batch"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

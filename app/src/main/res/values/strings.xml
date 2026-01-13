@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Assignment</string>
     <string name="add_student">Add Student</string>
+    <string name="add_batch">Add Batch</string>
     <string name="student_details">STUDENT DETAILS</string>
     <string name="academic_details">ACADEMIC DETAILS</string>
     <string name="student_name">Student Name</string>
@@ -54,5 +55,5 @@
     <string name="bajaj">Bajaj</string>
     <string name="yamaha">Yamaha</string>
     <string name="others">Others</string>
-    <string name="create_course">Create Course</string>
+    <string name="create_batch">Create Batch</string>
 </resources>
