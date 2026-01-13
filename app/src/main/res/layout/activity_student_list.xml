@@ -54,17 +54,10 @@
             android:layout_marginBottom="10dp"
             />
 
-        <include
-            android:id="@+id/recyclerHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/item_vehicle_header"
-            android:layout_below="@+id/filterTv"/>
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_below="@+id/recyclerHeader"
+            android:layout_below="@+id/filterTv"
             android:layout_width="match_parent"
             android:clipToOutline="true"
             android:layout_height="match_parent" />

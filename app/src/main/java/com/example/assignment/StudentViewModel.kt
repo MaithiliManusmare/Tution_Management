@@ -35,6 +35,8 @@ class StudentViewModel(private val repository: StudentRepository) : ViewModel() 
         }
     }
 
+    val allStudents: Flow<List<Student>> = repository.allVehicles
+
 
     fun updateSelectedBrands(brands: List<String>) {
         selectedBrands.value = brands

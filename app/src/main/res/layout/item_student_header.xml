@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/top_rounded_light_bg"
+    android:layout_margin="10dp">
+
+
+    <TextView
+        android:id="@+id/studentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/student_name"
+        android:padding="5dp"
+        android:textColor="@color/dark_text_color"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/courseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Batch - Morning"
+        android:padding="5dp"
+        android:textColor="@color/brand_text_color"
+        android:textSize="9sp"
+        android:layout_below="@+id/studentName"/>
+
+    <TextView
+        android:id="@+id/classGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:gravity="end"
+        android:text="10th"
+        android:textColor="@color/dark_blue"
+        android:textSize="12sp"
+        android:layout_alignParentEnd="true"/>
+</RelativeLayout>

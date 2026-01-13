@@ -6,13 +6,16 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
 class StudentListActivity : AppCompatActivity() {
     lateinit var button: TextView
     private lateinit var viewModel: StudentViewModel
-    private lateinit var vehicleAdapter: VehicleAdapter
+    private lateinit var studentAdapter: StudentAdapter
     private lateinit var filterTv: TextView
     private lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,10 +24,21 @@ class StudentListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_student_list)
         generateIds()
         onClickListeners()
-        setAdapter()
         initializeViewModel()
-
+        setAdapter()
     }
+
+
+
+    private fun observeStudents() {
+        lifecycleScope.launch {
+            viewModel.allStudents.collect { studentList ->
+                studentAdapter.setData(studentList)
+            }
+        }
+    }
+
+
     private fun initializeViewModel() {
         val vehicleDao = StudentDatabase.getDatabase(applicationContext).studentDao()
         val repository = StudentRepository(vehicleDao)
@@ -34,8 +48,9 @@ class StudentListActivity : AppCompatActivity() {
 
     private fun setAdapter() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        vehicleAdapter = VehicleAdapter()
-        recyclerView.adapter = vehicleAdapter
+        studentAdapter = StudentAdapter()
+        recyclerView.adapter = studentAdapter
+        observeStudents()
     }
     private fun generateIds() {
         button = findViewById(R.id.addButton)
