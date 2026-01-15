@@ -7,8 +7,10 @@
     <string name="student_name">Student Name</string>
     <string name="enter_student_name">Enter Student Name</string>
     <string name="dob">Date of Birth </string>
+    <string name="batch_timing">Batch Timing</string>
     <string name="gender">Gender</string>
     <string name="class_grade">Class/Grade</string>
+    <string name="enrolled_students">Enroll Students</string>
     <string name="other_details">OTHER DETAILS</string>
     <string name="board">Board</string>
     <string name="enrolled_subjects">Enrolled Subjects</string>
