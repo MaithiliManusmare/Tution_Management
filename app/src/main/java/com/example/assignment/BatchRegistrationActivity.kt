@@ -3,19 +3,25 @@ package com.example.assignment
 import android.app.TimePickerDialog
 import android.graphics.Typeface
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class BatchRegistrationActivity : AppCompatActivity() {
     lateinit var nameEditText : EditText
@@ -23,6 +29,8 @@ class BatchRegistrationActivity : AppCompatActivity() {
     lateinit var enrollStudentsEditText : EditText
     lateinit var startTimeEt: TextInputEditText
     lateinit var endTimeEt: TextInputEditText
+    lateinit var addButtonLL: LinearLayout
+    lateinit var viewmodel: BatchViewmodel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -51,8 +59,43 @@ class BatchRegistrationActivity : AppCompatActivity() {
         endTimeEt.setOnClickListener {
             showTimePicker(endTimeEt)
         }
-
+        addButtonLL.setOnClickListener {
+            saveBatch()
+        }
     }
+    private fun saveBatch() {
+        try {
+            viewmodel = ViewModelProvider(this).get(BatchViewmodel::class.java)
+            val name = nameEditText.text.toString().trim()
+            val subjects = enrollStudentsEditText.text.toString().trim()
+            val startTimeText = startTimeEt.text.toString().trim()
+            val endTimeText = endTimeEt.text.toString().trim()
+
+            if (name.isEmpty() || subjects.isEmpty() ||
+                startTimeText.isEmpty() || endTimeText.isEmpty()
+            ) {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            val batch = Batch(
+                name = name,
+                subjects = subjects,
+                startTime = parseTimeToMillis(startTimeText),
+                endTime = parseTimeToMillis(endTimeText)
+            )
+
+            viewmodel.insert(batch)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun parseTimeToMillis(time: String): Long {
+        val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
+        return sdf.parse(time)?.time ?: 0L
+    }
+
     private fun showTimePicker(editText: TextInputEditText) {
         val calendar = Calendar.getInstance()
 
@@ -82,6 +125,7 @@ class BatchRegistrationActivity : AppCompatActivity() {
         enrollStudentsEditText = findViewById(R.id.enrollStudentsEditText)
         startTimeEt = findViewById(R.id.startTimeEt)
         endTimeEt = findViewById(R.id.endTimeEt)
+        addButtonLL = findViewById(R.id.addButtonLL)
     }
 
     private fun showSelectionPopup(

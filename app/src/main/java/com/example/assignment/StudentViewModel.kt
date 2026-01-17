@@ -7,7 +7,6 @@ import kotlinx.coroutines.launch
 
 class StudentViewModel(private val repository: StudentRepository) : ViewModel() {
 
-    private val allVehiclesFlow: Flow<List<Student>> = repository.allVehicles
 
     private val selectedBrands = MutableStateFlow<List<String>>(emptyList())
     private val selectedFuelTypes = MutableStateFlow<List<String>>(emptyList())
@@ -35,7 +34,7 @@ class StudentViewModel(private val repository: StudentRepository) : ViewModel() 
         }
     }
 
-    val allStudents: Flow<List<Student>> = repository.allVehicles
+    val allStudents: Flow<List<Student>> = repository.allStudents
 
 
     fun updateSelectedBrands(brands: List<String>) {
