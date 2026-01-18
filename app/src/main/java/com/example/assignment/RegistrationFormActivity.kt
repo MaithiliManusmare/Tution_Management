@@ -43,7 +43,7 @@ class RegistrationFormActivity : AppCompatActivity() {
     private lateinit var dao: StudentDao
     private lateinit var viewModel: StudentViewModel
     private lateinit var repository: StudentRepository
-    private lateinit var factory: viewModelFactory
+    private lateinit var factory: StudentViewModelFactory
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +64,7 @@ class RegistrationFormActivity : AppCompatActivity() {
         db = StudentDatabase.getDatabase(this)
         dao = db.studentDao()
         repository = StudentRepository(dao)
-        factory = viewModelFactory(repository)
+        factory = StudentViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory).get(StudentViewModel::class.java)
     }
 

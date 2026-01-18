@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class StudentListActivity : AppCompatActivity() {
@@ -42,7 +41,7 @@ class StudentListActivity : AppCompatActivity() {
     private fun initializeViewModel() {
         val vehicleDao = StudentDatabase.getDatabase(applicationContext).studentDao()
         val repository = StudentRepository(vehicleDao)
-        val factory = viewModelFactory(repository)
+        val factory = StudentViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[StudentViewModel::class.java]
     }
 

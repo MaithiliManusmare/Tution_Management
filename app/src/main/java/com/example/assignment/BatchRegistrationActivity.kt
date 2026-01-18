@@ -3,7 +3,6 @@ package com.example.assignment
 import android.app.TimePickerDialog
 import android.graphics.Typeface
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -30,7 +29,12 @@ class BatchRegistrationActivity : AppCompatActivity() {
     lateinit var startTimeEt: TextInputEditText
     lateinit var endTimeEt: TextInputEditText
     lateinit var addButtonLL: LinearLayout
-    lateinit var viewmodel: BatchViewmodel
+    lateinit var viewModel: BatchViewmodel
+    private lateinit var db: StudentDatabase
+    private lateinit var dao: BatchDao
+    private lateinit var repository: BatchRepository
+    private lateinit var factory: BatchViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -40,10 +44,18 @@ class BatchRegistrationActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        createObject()
         generateIds()
         setOnClickListeners()
     }
 
+    private fun createObject() {
+        db = StudentDatabase.getDatabase(this)
+        dao = db.batchDao()
+        repository = BatchRepository(dao)
+        factory = BatchViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory).get(BatchViewmodel::class.java)
+    }
     private fun setOnClickListeners() {
         val enrolledSubjectList : List<String> = listOf("All Subjects")
 
@@ -63,9 +75,9 @@ class BatchRegistrationActivity : AppCompatActivity() {
             saveBatch()
         }
     }
+
     private fun saveBatch() {
         try {
-            viewmodel = ViewModelProvider(this).get(BatchViewmodel::class.java)
             val name = nameEditText.text.toString().trim()
             val subjects = enrollStudentsEditText.text.toString().trim()
             val startTimeText = startTimeEt.text.toString().trim()
@@ -85,7 +97,7 @@ class BatchRegistrationActivity : AppCompatActivity() {
                 endTime = parseTimeToMillis(endTimeText)
             )
 
-            viewmodel.insert(batch)
+            viewModel.insert(batch)
         } catch (e: Exception) {
             e.printStackTrace()
         }
