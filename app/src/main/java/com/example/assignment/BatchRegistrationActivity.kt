@@ -15,9 +15,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -34,6 +36,7 @@ class BatchRegistrationActivity : AppCompatActivity() {
     private lateinit var dao: BatchDao
     private lateinit var repository: BatchRepository
     private lateinit var factory: BatchViewModelFactory
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,17 +56,26 @@ class BatchRegistrationActivity : AppCompatActivity() {
         db = StudentDatabase.getDatabase(this)
         dao = db.batchDao()
         repository = BatchRepository(dao)
-        factory = BatchViewModelFactory(repository)
+        val studentRepository = StudentRepository(db.studentDao())
+        factory = BatchViewModelFactory(repository, studentRepository)
         viewModel = ViewModelProvider(this, factory).get(BatchViewmodel::class.java)
     }
+
+
     private fun setOnClickListeners() {
         val enrolledSubjectList : List<String> = listOf("All Subjects")
 
         enrolledSubjectsEditText.setOnClickListener{
-            showSelectionPopup("Select Subject",enrolledSubjectList, enrolledSubjectsEditText);
+            showSelectionPopup("Select Subject",enrolledSubjectList, enrolledSubjectsEditText)
         }
+
         enrollStudentsEditText.setOnClickListener{
-            showSelectionPopup("Select Students",enrolledSubjectList, enrollStudentsEditText);
+            lifecycleScope.launch {
+                viewModel.allStudents.collect { studentList ->
+                     val studentNameList: List<String> = studentList.map { it.name }
+                    showSelectionPopup("Select Students",studentNameList, enrollStudentsEditText)
+                }
+            }
         }
         startTimeEt.setOnClickListener {
             showTimePicker(startTimeEt)
