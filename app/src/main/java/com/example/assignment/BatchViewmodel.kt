@@ -22,7 +22,7 @@ class BatchViewmodel(private val batchRepository: BatchRepository,
         }
     }
 
-    suspend fun getStudentCount(batchName : String) : Int{
+    suspend fun getStudentCount(batchName: String): Int {
         return studentRepository.getStudentCountPerBatch(batchName)
     }
 

@@ -15,7 +15,7 @@ interface StudentDao {
     @Query("SELECT * FROM student")
     fun getAllStudents(): Flow<List<Student>>
 
-    @Query("select count( * ) from student where batchName = \"morning\"")
+    @Query("select count( * ) from student where batchName = :batch")
     suspend fun getStudentPerBatchCount(batch: String) : Int
 
 }

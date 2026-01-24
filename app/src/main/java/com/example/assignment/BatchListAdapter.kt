@@ -8,11 +8,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 
-class BatchListAdapter : RecyclerView.Adapter<BatchListAdapter.CourseViewHolder>() {
+class BatchListAdapter (private val studentCountInterface: StudentCountInterface) : RecyclerView.Adapter<BatchListAdapter.CourseViewHolder>() {
 
     private val items = mutableListOf<Batch>()
+    interface StudentCountInterface{
+        suspend fun getStudentCount(batchName : String) : Int
+    }
 
     fun setData(batches: List<Batch>) {
         Log.d("batchList", batches.toString())
@@ -34,7 +40,7 @@ class BatchListAdapter : RecyclerView.Adapter<BatchListAdapter.CourseViewHolder>
 
     override fun getItemCount(): Int = items.size
 
-    class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvStudentName: TextView = itemView.findViewById(R.id.studentName)
         private val tvCourse: TextView = itemView.findViewById(R.id.courseName)
         private val tvClassGrade: TextView = itemView.findViewById(R.id.classGrade)
@@ -44,8 +50,10 @@ class BatchListAdapter : RecyclerView.Adapter<BatchListAdapter.CourseViewHolder>
             tvStudentName.text = batch.name
             val batchTime = "${batch.startTime} - ${batch.startTime}"
             tvCourse.text = batchTime
-//            tvClassGrade.text = batch.grade.toString()
-
+            CoroutineScope(Dispatchers.Main).launch {
+                val count = studentCountInterface.getStudentCount(batch.name)
+                tvClassGrade.text = count.toString()
+            }
             try {
 //                val purchaseYear = student.yearOfPurchase.toInt()
 //                val purchaseDate = LocalDate.of(purchaseYear, 1, 1)

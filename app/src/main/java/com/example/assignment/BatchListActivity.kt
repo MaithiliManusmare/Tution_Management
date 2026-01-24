@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 
-class BatchListActivity : AppCompatActivity() {
+class BatchListActivity : AppCompatActivity() , BatchListAdapter.StudentCountInterface {
     lateinit var courseButton : Button
     lateinit var batchAdapter : BatchListAdapter
     lateinit var viewModel : BatchViewmodel
@@ -42,14 +42,12 @@ class BatchListActivity : AppCompatActivity() {
     }
     private fun setAdapter() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        batchAdapter = BatchListAdapter()
+        batchAdapter = BatchListAdapter(this)
         recyclerView.adapter = batchAdapter
         observeStudents()
     }
 
     private fun observeStudents() {
-        val studentCount : Int = viewModel.getStudentCount()
-
         lifecycleScope.launch {
             viewModel.allBatch.collect { batchList ->
                 batchAdapter.setData(batchList)
@@ -68,4 +66,9 @@ class BatchListActivity : AppCompatActivity() {
         courseButton = findViewById(R.id.courseButton)
         recyclerView = findViewById(R.id.recyclerView)
     }
+
+    override suspend fun getStudentCount(batchName: String): Int {
+        return viewModel.getStudentCount(batchName)
+    }
+
 }
