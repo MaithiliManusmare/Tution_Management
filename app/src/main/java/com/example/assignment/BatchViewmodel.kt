@@ -3,6 +3,7 @@ package com.example.assignment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.launch
 
 class BatchViewmodel(private val batchRepository: BatchRepository,
@@ -19,6 +20,10 @@ class BatchViewmodel(private val batchRepository: BatchRepository,
                 e.printStackTrace()
             }
         }
-
     }
+
+    suspend fun getStudentCount(batchName : String) : Int{
+        return studentRepository.getStudentCountPerBatch(batchName)
+    }
+
 }

@@ -48,6 +48,8 @@ class BatchListActivity : AppCompatActivity() {
     }
 
     private fun observeStudents() {
+        val studentCount : Int = viewModel.getStudentCount()
+
         lifecycleScope.launch {
             viewModel.allBatch.collect { batchList ->
                 batchAdapter.setData(batchList)

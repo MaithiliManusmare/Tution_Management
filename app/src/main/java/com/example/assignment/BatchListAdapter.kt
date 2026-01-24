@@ -42,7 +42,8 @@ class BatchListAdapter : RecyclerView.Adapter<BatchListAdapter.CourseViewHolder>
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(batch: Batch) {
             tvStudentName.text = batch.name
-//            tvCourse.text = batch.batchName
+            val batchTime = "${batch.startTime} - ${batch.startTime}"
+            tvCourse.text = batchTime
 //            tvClassGrade.text = batch.grade.toString()
 
             try {

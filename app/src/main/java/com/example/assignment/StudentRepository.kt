@@ -10,4 +10,10 @@ class StudentRepository(private val studentDao: StudentDao) {
         studentDao.insert(student)
     }
 
+    suspend fun getStudentCountPerBatch(batch: String) : Int {
+        return studentDao.getStudentPerBatchCount(batch)
+    }
+
+
+
 }

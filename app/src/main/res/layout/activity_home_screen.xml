@@ -77,16 +77,7 @@
                     android:paddingBottom="3dp"
                     android:text="Student"
                     android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/totalVehicleTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="3dp"
-                    android:paddingTop="4dp"
-                    android:textColor="@color/dark_text_color"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:text="" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,22 +102,79 @@
                     android:text="@string/batch"
                     android:paddingBottom="3dp"
                     android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/totalEvTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="3dp"
-                    android:paddingTop="4dp"
-                    android:textColor="@color/dark_text_color"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:text="2300" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="4dp"
                     android:textColor="@color/dark_text_color"
                     android:text="@string/total_batches" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/column2_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/columnLayout">
+
+            <LinearLayout
+                android:id="@+id/attendanceCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="@color/light_yellow_bg_color"
+                android:background="@drawable/rounded_background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="3dp"
+                    android:text="Attendance"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+                    android:textColor="@color/dark_text_color"
+                    android:text="@string/total_students" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/newCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:backgroundTint="@color/light_blue_bg_color"
+                android:background="@drawable/rounded_background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:paddingBottom="3dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+                    android:textColor="@color/dark_text_color"
+                    android:text="@string/total_students"/>
+
             </LinearLayout>
 
 
