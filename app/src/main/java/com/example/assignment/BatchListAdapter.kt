@@ -48,7 +48,7 @@ class BatchListAdapter (private val studentCountInterface: StudentCountInterface
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(batch: Batch) {
             tvStudentName.text = batch.name
-            val batchTime = "${batch.startTime} - ${batch.startTime}"
+            val batchTime = "${batch.startTime.toReadableTime()} - ${batch.startTime.toReadableTime()}"
             tvCourse.text = batchTime
             CoroutineScope(Dispatchers.Main).launch {
                 val count = studentCountInterface.getStudentCount(batch.name)
