@@ -49,10 +49,20 @@ class StudentListActivity : AppCompatActivity() {
 
     private fun setAdapter() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        studentAdapter = StudentAdapter()
+
+        studentAdapter = StudentAdapter(
+            onEditClick = { student ->
+//                handleEditStudent(student)
+            },
+            onDeleteClick = { student ->
+//                showDeleteConfirmation(student)
+            }
+        )
+
         recyclerView.adapter = studentAdapter
         observeStudents()
     }
+
     private fun generateIds() {
         button = findViewById(R.id.addButton)
         recyclerView = findViewById(R.id.recyclerView)

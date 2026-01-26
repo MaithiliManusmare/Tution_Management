@@ -5,12 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import java.time.LocalDate
 
-class StudentAdapter : RecyclerView.Adapter<StudentAdapter.VehicleViewHolder>() {
+class StudentAdapter(
+    private val onEditClick: (Student) -> Unit,
+    private val onDeleteClick: (Student) -> Unit
+)  : RecyclerView.Adapter<StudentAdapter.VehicleViewHolder>() {
 
     private val items = mutableListOf<Student>()
 
@@ -34,35 +39,38 @@ class StudentAdapter : RecyclerView.Adapter<StudentAdapter.VehicleViewHolder>() 
 
     override fun getItemCount(): Int = items.size
 
-    class VehicleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class VehicleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvStudentName: TextView = itemView.findViewById(R.id.studentName)
         private val tvCourse: TextView = itemView.findViewById(R.id.courseName)
         private val tvClassGrade: TextView = itemView.findViewById(R.id.classGrade)
+        private val icon: ImageView = itemView.findViewById(R.id.icon)
 
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(student: Student) {
             tvStudentName.text = student.name
             tvCourse.text = student.batchName
             tvClassGrade.text = student.grade.toString()
+            icon.setOnClickListener {
+                val popup = PopupMenu(it.context, it)
+                popup.menuInflater.inflate(R.menu.menu_item_actions, popup.menu)
 
-            try {
-//                val purchaseYear = student.yearOfPurchase.toInt()
-//                val purchaseDate = LocalDate.of(purchaseYear, 1, 1)
-                val now = LocalDate.now()
+                popup.setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.action_edit -> {
+                            onEditClick(student)
+                            true
+                        }
+                        R.id.action_delete -> {
+                            onDeleteClick(student)
+                            true
+                        }
+                        else -> false
+                    }
+                }
 
-//                val period = Period.between(purchaseDate, now)
-//                val years = period.years
-//                val months = period.months
-
-//                val yearsText = if (years > 0) "$years year${if (years > 1) "s" else ""}" else ""
-//                val monthsText = if (months > 0) "$months month${if (months > 1) "s" else ""}" else ""
-//
-//                val durationText = listOf(yearsText, monthsText).filter { it.isNotEmpty() }.joinToString(" ")
-
-//                tvPurchase.text = if (durationText.isNotEmpty()) durationText else "Less than a month"
-            } catch (e: Exception) {
-//                tvPurchase.text = "Invalid date"
+                popup.show()
             }
+
         }
 
 
