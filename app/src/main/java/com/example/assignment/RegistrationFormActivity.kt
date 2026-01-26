@@ -69,34 +69,30 @@ class RegistrationFormActivity : AppCompatActivity() {
         }
         createObject()
         initIds()
-        setBatchListAdapter()
+        observeBatchList()
         onClickListners()
     }
 
-    private fun setBatchListAdapter() {
-        observeBatchList()
-//         batchList = listOf("Morning", "Afternoon", "Evening")
-
-        val adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            batchList
-        )
-
-        batchDropdown.setAdapter(adapter)
-    }
 
     private fun observeBatchList() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.allBatches.collect { batches ->
-                    batchList.clear()
-                    batchList.addAll(batches)
+
+                    val batchNames = batches.map { it.name }
+
+                    val adapter = ArrayAdapter(
+                        this@RegistrationFormActivity,
+                        android.R.layout.simple_list_item_1,
+                        batchNames
+                    )
+
+                    batchDropdown.setAdapter(adapter)
                 }
             }
         }
-
     }
+
 
     private fun createObject() {
         db = StudentDatabase.getDatabase(this)
@@ -154,8 +150,9 @@ class RegistrationFormActivity : AppCompatActivity() {
         }
 
         batchDropdown.setOnItemClickListener { _, _, position, _ ->
-            selectedBatch = batchList[position].name
-//            Toast.makeText(this, selectedBatch, Toast.LENGTH_SHORT).show()
+            selectedBatch = batchDropdown.adapter.getItem(position).toString()
+
+            Toast.makeText(this, selectedBatch, Toast.LENGTH_SHORT).show()
         }
     }
 
