@@ -1,12 +1,13 @@
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.assignment.Batch
 import com.example.assignment.BatchRepository
 import com.example.assignment.Student
 import com.example.assignment.StudentRepository
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class StudentViewModel(private val repository: StudentRepository) : ViewModel() {
+class StudentViewModel(private val repository: StudentRepository, private val batchRepository: BatchRepository) : ViewModel() {
 
 
     private val selectedBrands = MutableStateFlow<List<String>>(emptyList())
@@ -36,6 +37,7 @@ class StudentViewModel(private val repository: StudentRepository) : ViewModel() 
     }
 
     val allStudents: Flow<List<Student>> = repository.allStudents
+    val allBatches: Flow<List<Batch>> = batchRepository.allBatches
 
 
     fun updateSelectedBrands(brands: List<String>) {

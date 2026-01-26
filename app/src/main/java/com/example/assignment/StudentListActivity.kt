@@ -39,9 +39,11 @@ class StudentListActivity : AppCompatActivity() {
 
 
     private fun initializeViewModel() {
-        val vehicleDao = StudentDatabase.getDatabase(applicationContext).studentDao()
-        val repository = StudentRepository(vehicleDao)
-        val factory = StudentViewModelFactory(repository)
+        val studentDao = StudentDatabase.getDatabase(applicationContext).studentDao()
+        val batchDao = StudentDatabase.getDatabase(applicationContext).batchDao()
+        val repository = StudentRepository(studentDao)
+        val batchRepository = BatchRepository(batchDao)
+        val factory = StudentViewModelFactory(repository, batchRepository)
         viewModel = ViewModelProvider(this, factory)[StudentViewModel::class.java]
     }
 

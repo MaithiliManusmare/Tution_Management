@@ -353,17 +353,33 @@
                     app:boxStrokeColor="@color/view_color"
                     app:boxStrokeWidth="0.2dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/batchNameEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:cursorVisible="true"
-                        android:focusable="true"
+                        android:layout_marginTop="20dp"
                         android:hint="@string/batch_name"
-                        android:inputType="text"
-                        android:padding="20dp"
-                        android:textColor="@color/hint_text_color"
-                        android:textSize="12sp" />
+                        app:boxBackgroundMode="outline"
+                        app:boxCornerRadiusBottomEnd="14dp"
+                        app:boxCornerRadiusBottomStart="14dp"
+                        app:boxCornerRadiusTopEnd="14dp"
+                        app:boxCornerRadiusTopStart="14dp"
+                        app:boxStrokeColor="@color/view_color"
+                        app:boxStrokeWidth="0.2dp"
+                        app:endIconMode="dropdown_menu">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/batchDropdown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"
+                            android:focusable="false"
+                            android:clickable="true"
+                            android:textSize="12sp"
+                            android:textColor="@color/black" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
 
                 </com.google.android.material.textfield.TextInputLayout>
 

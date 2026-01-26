@@ -6,6 +6,8 @@ import android.app.DatePickerDialog
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -17,11 +19,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.launch
 import java.util.Calendar
+import kotlin.collections.listOf
 
 class RegistrationFormActivity : AppCompatActivity() {
     private lateinit var studentNameEditText: TextInputEditText
@@ -35,16 +43,20 @@ class RegistrationFormActivity : AppCompatActivity() {
 
     private lateinit var parentMobNoEditText: TextInputEditText
     private lateinit var studentMobNoEditText: TextInputEditText
-    private lateinit var batchNameEditText: TextInputEditText
+    private lateinit var batchNameEditText: TextInputLayout
     private lateinit var joiningDateEditText: TextInputEditText
     private lateinit var feeAmountEditText: TextInputEditText
     private lateinit var lastYearPercentEditText: TextInputEditText
     private lateinit var db: StudentDatabase
     private lateinit var dao: StudentDao
+    private lateinit var batchDao: BatchDao
     private lateinit var viewModel: StudentViewModel
     private lateinit var repository: StudentRepository
+    private lateinit var batchRepository: BatchRepository
     private lateinit var factory: StudentViewModelFactory
-
+    private lateinit var batchDropdown: AutoCompleteTextView
+    private lateinit var selectedBatch : String
+    private val batchList: MutableList<Batch> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,14 +69,42 @@ class RegistrationFormActivity : AppCompatActivity() {
         }
         createObject()
         initIds()
+        setBatchListAdapter()
         onClickListners()
+    }
+
+    private fun setBatchListAdapter() {
+        observeBatchList()
+//         batchList = listOf("Morning", "Afternoon", "Evening")
+
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            batchList
+        )
+
+        batchDropdown.setAdapter(adapter)
+    }
+
+    private fun observeBatchList() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.allBatches.collect { batches ->
+                    batchList.clear()
+                    batchList.addAll(batches)
+                }
+            }
+        }
+
     }
 
     private fun createObject() {
         db = StudentDatabase.getDatabase(this)
         dao = db.studentDao()
+        batchDao = db.batchDao()
         repository = StudentRepository(dao)
-        factory = StudentViewModelFactory(repository)
+        batchRepository = BatchRepository(batchDao)
+        factory = StudentViewModelFactory(repository, batchRepository)
         viewModel = ViewModelProvider(this, factory).get(StudentViewModel::class.java)
     }
 
@@ -113,6 +153,10 @@ class RegistrationFormActivity : AppCompatActivity() {
             showSelectionPopup("Select Subject",enrolledSubjectList, enrolledSubjectsEditText);
         }
 
+        batchDropdown.setOnItemClickListener { _, _, position, _ ->
+            selectedBatch = batchList[position].name
+//            Toast.makeText(this, selectedBatch, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun showDatePickerDialog(isBirthDate : Boolean) {
@@ -196,7 +240,6 @@ class RegistrationFormActivity : AppCompatActivity() {
         val parentName = parentNameEditText.text?.toString()?.trim().orEmpty()
         val parentMobileNumber = parentMobNoEditText.text?.toString()?.trim().orEmpty()
         val studentMobileNumber = studentMobNoEditText.text?.toString()?.trim().orEmpty()
-        val courseName = batchNameEditText.text?.toString()?.trim().orEmpty()
         val dateOfJoining = joiningDateEditText.text?.toString()?.trim().orEmpty()
         val feeAmount = feeAmountEditText.text?.toString()?.toIntOrNull() ?: 0
         val lastYearPercent = lastYearPercentEditText.text.toString()?.trim().orEmpty()
@@ -211,8 +254,8 @@ class RegistrationFormActivity : AppCompatActivity() {
 
         if (studentName.isEmpty() || placeholders.contains(studentName) ||
             gender.isEmpty() || placeholders.contains(gender) ||
-            board.isEmpty() || placeholders.contains(board) ||
-            enrolledSubjects.isEmpty() || placeholders.contains(enrolledSubjects)
+            board.isEmpty() || placeholders.contains(board)
+//            enrolledSubjects.isEmpty() || placeholders.contains(enrolledSubjects)
         ) {
             Toast.makeText(this, getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT).show()
             return
@@ -228,7 +271,7 @@ class RegistrationFormActivity : AppCompatActivity() {
             guardianName = parentName,
             guardianMobNumber = parentMobileNumber,
             studentMobNumber = studentMobileNumber,
-            batchName = courseName,
+            batchName = selectedBatch,
             joiningDate = dateOfJoining,
             feeAmount = feeAmount,
             lastYearPercent = lastYearPercent
@@ -253,5 +296,6 @@ class RegistrationFormActivity : AppCompatActivity() {
         joiningDateEditText = findViewById(R.id.joiningDateEditText)
         feeAmountEditText = findViewById(R.id.feeAmountEditText)
         lastYearPercentEditText = findViewById(R.id.lastYearPercentEditText)
+        batchDropdown = findViewById(R.id.batchDropdown)
     }
 }

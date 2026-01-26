@@ -68,7 +68,7 @@
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Vehicle"
+        android:text="Add Student"
         android:textSize="16sp"
         android:textColor="@color/white"
         android:padding="15dp"
